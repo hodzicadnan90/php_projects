@@ -1,11 +1,23 @@
-<?php include 'includes/header.php'; ?>
-        <div class="blog-post">
-            <h2 class="blog-post-title">International PHP Conference 2017</h2>
-            <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<?php include 'includes/header.php'; ?>
+
+<?php
+    $db = new Database();
+
+    $query = "SELECT * FROM categories";
+
+    $categories = $db->select($query);
+
+    $id = $_GET['id'];
+
+    $query = "SELECT * FROM posts WHERE id = $id";
+
+    $post = $db->select($query)->fetch_assoc();
+?>
+        <div class="blog-post">
+            <h2 class="blog-post-title"><?php echo $post['title']; ?></h2>
+            <p class="blog-post-meta"><?php echo $post['date']; ?> by <a href="#"><?php echo $post['author']; ?></a></p>
+                <?php echo $post['body']; ?>
         </div>
 
 
